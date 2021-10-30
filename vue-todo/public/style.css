@@ -1,0 +1,25 @@
+:root{
+    --beige-color : beige;
+    --brown-color : rgb(119, 66, 66);
+}
+
+.narrow{
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background-color:var(--brown-color);
+    color: var(--beige-color);
+    z-index: 99;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 50px;
+    font-weight: 800;
+    top: 0;
+}
+
+@media screen and (min-width: 554px){
+    .narrow{
+        display: none;
+    }
+}
