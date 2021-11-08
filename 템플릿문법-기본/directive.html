@@ -1,0 +1,44 @@
+<!-- v-sth 과 같이 v-태그로  data값을 가져오는 것을 directive라 한다.-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <div v-bind:id="uuid" v-bind:class="name">{{doubleNum}}</div>
+
+        <!-- v-if/v-else 는 false일 경우 element 자체가 사라져서 보이지 않지만 -->
+        <!-- v-show는 false일 경우 element는 존재하지만 display:none으로 설정되어 보이지 않는다.-->
+        <div v-if="loading">Loading...</div>
+        <div v-else>You logged in!!</div>
+        <div v-show="loading">Loading...</div>
+        <input v-model="msg">{{msg}}</input>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el: "#app",
+            data: {
+                num: 10,
+                uuid: "box",
+                name: "container",
+                loading: false,
+                msg: ""
+            },
+            //data에 선언된 변수를 활용하는 또 다른 변수는 computed에 선언해 주는 것이 좋다.
+            computed: {
+                doubleNum: function () {
+                    return this.num * 2;
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

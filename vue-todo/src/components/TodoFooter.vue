@@ -1,15 +1,19 @@
 <template>
   <footer>
-    <button v-on:click="clearList">Clear All</button>
+    <button @click="clearList">Clear All</button>
   </footer>
 </template>
 
 <script>
+import { mapMutations } from "vuex";
 export default {
   methods: {
-    clearList: function () {
-      localStorage.clear();
-    },
+    ...mapMutations({
+      clearList: "removeAllItems",
+    }),
+    // clearList() {
+    //   this.$store.commit("removeAllItems");
+    // },
   },
 };
 </script>

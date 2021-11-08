@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 상위 > 하위 :: props -->
+        <app-header v-bind:propsdata='num'></app-header>
+        <!-- 하위 > 상위 :: event -->
+        <app-content v-on:send='setNum'></app-content>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        let appHeader = {
+            template: '<h2>{{propsdata}}</h2>',
+            props: ['propsdata']
+        };
+        let appContent = {
+            //버튼 클릭 시 sendNum 메소드 호출
+            template: '<button v-on:click="sendNum">send</button>',
+            methods: {
+                //sendNum 메소드 호출 시 파라미터 값(10)가지고 send라는 이벤트 발생
+                sendNum: function () {
+                    this.$emit("send", 10);
+                }
+            }
+        };
+
+        //인스턴스(Root)
+        let vm = new Vue({
+            el: '#app',
+            components: {
+                'app-header': appHeader,
+                'app-content': appContent
+            },
+            methods: {
+                //하위 컴포넌트에서 이벤트 발생으로 전달된 데이터 받아서
+                //num이라는 값에 할당
+                setNum: function (value) {
+                    this.num = value;
+                }
+            },
+            data: {
+                num: 0
+            }
+        });
+    </script>
+</body>
+
+</html>

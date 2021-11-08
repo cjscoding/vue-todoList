@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <button v-on:click="getData">click!!</button>
+        <div>{{users}}</div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                users: []
+            },
+            methods: {
+                getData: function () {
+                    //현 위치에서 this : new Vue 즉, 인스턴스
+                    let vm = this;
+                    //10개의 데이터가 있는 임의 사이트 가져온 거임
+                    axios.get('https://jsonplaceholder.typicode.com/users/')
+                        //data를 가져오는 데 성공했을 경우
+                        .then(function (res) {
+                            //data 10개가 배열 형식으로 콘솔에 뜸
+                            console.log(res.data);
+                            //axios 내에서는 data key에 바로 접근할 수 없기 때문에
+                            //미리 Vue 인스턴스를 변수로 지정하고
+                            //그 변수의 데이터 속성값에 response.data를 할당한다.
+                            vm.users = res.data;
+                        })
+                        //data를 가져오는 데 실패했을 경우
+                        .catch(function (err) {
+                            console.log(err);
+                        })
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>

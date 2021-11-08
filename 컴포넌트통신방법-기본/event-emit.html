@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <p>{{num}}</p>
+        <!-- v-on:하위 컴포넌트에서 발생한 이벤트 이름="상위 컴포넌트의 메서드 이름" -->
+        <app-header v-on:pass="logText"></app-header>
+        <app-content v-on:increase="plusNum"></app-content>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        let appHeader = {
+            //appHeader(하위 컴포넌트)에서 Root(상위 컴포넌트)로 event를 보낼 때
+            //v-on문법으로 click시 method(passEvent)를 정의한다.(문법은 이후 자세히 할 예정)
+            template: '<button v-on:click="passEvent">click me</button>',
+            methods: {
+                passEvent: function () {
+                    this.$emit('pass');
+                }
+            }
+        };
+        let appContent = {
+            template: '<button v-on:click="increaseNum">add</button>',
+            methods: {
+                increaseNum: function () {
+                    this.$emit('increase');
+                }
+            },
+        };
+
+        let vm = new Vue({
+            el: '#app',
+            components: {
+                'app-header': appHeader,
+                'app-content': appContent
+            },
+            methods: {
+                logText: function () {
+                    console.log('hi');
+                },
+                plusNum: function () {
+                    this.num++;
+                }
+            },
+            data: {
+                num: 10
+            }
+        });
+    </script>
+</body>
+
+</html>

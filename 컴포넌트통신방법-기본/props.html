@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- v-bind:프롭스 속성 이름="상위 컴포넌트의 데이터 이름" -->
+        <app-header v-bind:propsdata="message"></app-header>
+        <app-content v-bind:propsdata="num"></app-content>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        //data를 하위 컴포넌트로 내리기 위해 props를 사용해야 한다.
+        //상위, 하위 컴포넌트 모두 코드를 추가해주었다.
+        let appHeader = {
+            template: "<h1>{{propsdata}}</h1>",
+            props: ["propsdata"]
+        };
+
+        let appContent = {
+            template: "<div>{{propsdata}}</div>",
+            props: ["propsdata"]
+        }
+
+        let vm = new Vue({
+            el: "#app",
+            components: {
+                "app-header": appHeader,
+                "app-content": appContent
+            },
+            data: {
+                message: "hello",
+                num: 10
+            }
+        });
+
+    </script>
+</body>
+
+</html>

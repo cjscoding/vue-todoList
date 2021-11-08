@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <app-header></app-header>
+        <app-content></app-content>
+        <app-footer></app-footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        //하위컴포넌트들,,
+        //전역 컴포넌트 형식 => Vue.component
+        //모든 인스턴스에 적용됨
+        Vue.component("app-header", {
+            template: "<h1>Header</h1>"
+        })
+        Vue.component("app-content", {
+            template: "<div>content</div>"
+        })
+
+        //생성과 동시에 상위 컴포넌트(Root)로 지정됨
+        let vm = new Vue({
+            el: "#app",
+            //지역 컴포넌트
+            //인스턴스마다 설정해줘야 함
+            components: {
+                "app-footer": {
+                    template: "<footer>footer</footer>"
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

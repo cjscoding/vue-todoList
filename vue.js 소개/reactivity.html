@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="hi">hi</div>
+</body>
+<script>
+    const HI = document.querySelector("#hi");
+    const arr = {};
+
+
+    //https://sas-study.tistory.com/290
+    //즉시 실행 함수 : 정의되자마자 실행되는 함수
+    (function () {
+        function init() {
+            Object.defineProperty(arr, "key", {
+                get: function () {
+                    console.log("속성 값에 접근합니다.");
+                },
+                set: function (newValue) {
+                    console.log("속성에 새로운 값을 할당합니다.");
+                    insert(newValue);
+                }
+            });
+        }
+
+        function insert(value) {
+            HI.innerHTML = value;
+        }
+
+        init();
+    })();
+
+</script>
+
+</html>
